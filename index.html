@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+  <title>Document</title>
+  <!-- CSS only -->
+  <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>  
+  <div class="contenedor">
+    <header class="header">
+      <img src="Vectorletra.png" alt="Traductor para Alura">     
+    </header>
+    <main class="texto">
+      <img src="input.png" id="input" alt="Ingrese aquí su texto">
+      <textarea class="ingrese-texto" id="Textarea"></textarea>
+    </main>
+    <Aside class="codigo">
+      <img src="1.png" id="imagen1" alt="Traductor para Alura">
+      <p class="textocodigo" id="textocopiar"></p>
+      <button class="button-copiar" type="button" id="copiar">Copiar</button>
+    </Aside>
+    <div class="boton1">
+      <button class="button-codificar" type="button" id="codificar">Encriptar</button>
+    </div>
+    <div class="boton2">
+      <button class="button-decodificar" type="button" id="decodificar">Desencriptar</button>
+    </div>
+    <footer class="footer">        
+      <p class="text-center text-muted">Encriptador 2022 para Alura por <a href="https://www.linkedin.com/in/juan-carlos-olivares-román-a3b452142/" class="nav-link px-2 text-muted"> Janter Cyrano </a></p>
+    </footer>
+  </div>
+
+  <script>
+    //'a'|'ai', 'e'|'enter', 'i'|'imes', 'o'|'ober', 'u'|'ufat'
+    var texto = document.getElementById("Textarea");
+    var textocopiar = document.getElementById("textocopiar");
+    var boton = document.getElementById("codificar");
+    var boton2 = document.getElementById("decodificar");
+    var boton3 = document.getElementById("copiar");
+    var input = document.getElementById("input");
+    var imagen1=document.getElementById("imagen1");
+
+    texto.style.visibility="hidden"
+    boton3.style.visibility="hidden"
+
+    function codificar(e) {
+      var codigo = "";
+
+      for (let i = 0; i < texto.value.length; i++) {
+        
+        if (texto.value.charAt(i) == 'a') {
+          
+          codigo += 'ai';
+
+        } else if (texto.value.charAt(i) == 'e') {
+
+          codigo +='enter';
+
+        } else if (texto.value.charAt(i) == 'i') {
+
+          codigo +='imes';
+
+        } else if (texto.value.charAt(i) == 'o') {
+
+          codigo +='ober';
+
+        } else if (texto.value.charAt(i) == 'u') {
+
+          codigo += 'ufat';
+
+        }  else {
+
+          codigo += texto.value.charAt(i);
+
+        } 
+
+      }       
+
+      e.preventDefault();
+      textocopiar.append(codigo);
+      mostrarCodigo();    
+
+    }
+
+    function decodificar(e) {
+      var codigo = "";
+
+      for (let i = 0; i < texto.value.length; i++) {
+  
+        if (texto.value.charAt(i) == 'a' && texto.value.charAt(i+1) == 'i') {
+          
+          codigo += 'a';
+          i+=1;
+
+        } else if (texto.value.charAt(i) == 'e' && texto.value.charAt(i+1) == 'n') {
+
+          codigo +='e';
+          i+=4;
+
+        } else if (texto.value.charAt(i) == 'i' && texto.value.charAt(i+1) == 'm') {
+
+          codigo +='i';
+          i+=3;
+
+        } else if (texto.value.charAt(i) == 'o' && texto.value.charAt(i+1) == 'b') {
+
+          codigo +='o';
+          i+=3;
+
+        } else if (texto.value.charAt(i) == 'u' && texto.value.charAt(i+1) == 'f') {
+
+          codigo += 'u';
+          i+=3;
+
+        }  else {
+
+          codigo += texto.value.charAt(i);
+
+        } 
+
+      } 
+     
+      e.preventDefault();
+      textocopiar.append(codigo);
+      mostrarCodigo();
+
+    }
+
+    function copiar() {
+      // no me funciono el execComand()
+      navigator.clipboard.writeText(textocopiar.innerText);      
+      //alert("el código ha sido copiado"); //<-como opción se puede lanzar una Alerta
+    }    
+
+    function mostrarTexto(){
+
+      input.style.display= "none"
+      texto.style.visibility= "visible"
+
+    }
+
+    function mostrarCodigo(){
+
+      imagen1.style.display= "none";
+      boton3.style.visibility= "visible";
+
+    }
+
+    input.onclick= mostrarTexto;
+    boton.onclick= codificar;
+    boton2.onclick= decodificar;
+    boton3.onclick= copiar;
+    
+
+  </script>
+
+</body>
+
+</html>
